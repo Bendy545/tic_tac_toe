@@ -1,21 +1,45 @@
 import Square from './Square.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import calculateWinner from './CalculateWinner.tsx';
+import changeBackground from './ChangeBackground.tsx';
 
 function Board() {
   const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
   const [isNext, setIsNext] = useState(true);
 
   function handleClick(i: number) {
-    if (squares[i]) return;
+    if (calculateWinner({squares}) || squares[i]) return;
 
     const nextSquare = squares.slice();
     nextSquare[i] = isNext ? 'X' : 'O';
 
     setSquares(nextSquare);
     setIsNext(!isNext);
+
+
   }
+
+  const winner = calculateWinner({squares})
+  const draw = squares.every(square => square!== null) && !winner;
+  let status;
+  if (winner) {
+    status = "Winner " + winner;
+  } else if(draw){
+    status = "Draw"
+  } else {
+    status = "Next player " + (isNext ? 'X' : 'O')
+  }
+
+
+
+  useEffect(() => {
+    changeBackground({winner});
+  }, [winner]);
   return (
     <>
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="mb-3 h5 w-75 bg-dark text-light p-3 rounded-5 bg-gradient">{status}</div>
+      </div>
       <div className="board-row">
         <Square value={squares[0]} OnClick={() => handleClick(0)}/>
         <Square value={squares[1]} OnClick={() => handleClick(1)}/>
