@@ -5,7 +5,7 @@ function Square({value, OnClick} : {value: string|null, OnClick: () => void}) {
   return (
     <button
       type="button"
-      className={`btn ${buttonClass} btn-lg squareButton`}
+      className={`btn border-3 border-black ${buttonClass} btn-lg squareButton`}
       onClick={OnClick}
     >
       {value}
