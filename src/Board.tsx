@@ -1,9 +1,10 @@
 import Square from './Square.tsx';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import calculateWinner from './CalculateWinner.tsx';
-import changeBackground from './ChangeBackground.tsx';
+import ChangeBackground from './ChangeBackground.tsx';
+import * as React from 'react';
 
-function Board() {
+const Board: React.FC =() => {
   const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
   const [isNext, setIsNext] = useState(true);
 
@@ -15,7 +16,6 @@ function Board() {
 
     setSquares(nextSquare);
     setIsNext(!isNext);
-
 
   }
 
@@ -30,16 +30,13 @@ function Board() {
     status = "Next player " + (isNext ? 'X' : 'O')
   }
 
-
-
-  useEffect(() => {
-    changeBackground({winner});
-  }, [winner]);
   return (
     <>
       <div className="d-flex justify-content-center align-items-center">
         <div className="mb-3 h5 w-75 bg-dark text-light p-3 rounded-5 bg-gradient">{status}</div>
       </div>
+
+      <ChangeBackground winner={winner} draw={draw}/>
       <div className="board-row">
         <Square value={squares[0]} OnClick={() => handleClick(0)}/>
         <Square value={squares[1]} OnClick={() => handleClick(1)}/>
