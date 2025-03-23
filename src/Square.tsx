@@ -1,6 +1,11 @@
+import * as React from 'react';
 
+interface SquareProps {
+  value: string|null,
+  OnClick: () => void
+}
 
-function Square({value, OnClick} : {value: string|null, OnClick: () => void}) {
+const Square: React.FC<SquareProps> = ({value, OnClick} : SquareProps) => {
   const buttonClass = value === 'X' ? 'btn-danger' : value === 'O' ? 'btn-success' : 'btn-light';
   return (
     <button
