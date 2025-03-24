@@ -3,6 +3,8 @@ import {  useState } from 'react';
 import calculateWinner from './CalculateWinner.tsx';
 import ChangeBackground from './ChangeBackground.tsx';
 import * as React from 'react';
+import Restart from './Restart.tsx';
+
 
 const Board: React.FC =() => {
   const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
@@ -30,6 +32,11 @@ const Board: React.FC =() => {
     status = "Next player " + (isNext ? 'X' : 'O')
   }
 
+  function handleRestart() {
+    setSquares(Array(9).fill(null));
+    setIsNext(true);
+  }
+
   return (
     <>
       <div className="d-flex justify-content-center align-items-center">
@@ -52,6 +59,7 @@ const Board: React.FC =() => {
         <Square value={squares[7]} OnClick={() => handleClick(7)}/>
         <Square value={squares[8]} OnClick={() => handleClick(8)}/>
       </div>
+      <Restart OnClick={handleRestart}/>
     </>
   )
 }
