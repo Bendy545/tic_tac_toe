@@ -1,14 +1,31 @@
 import Square from './Square.tsx';
-import {  useState } from 'react';
+import {useEffect, useState} from 'react';
 import calculateWinner from './CalculateWinner.tsx';
 import ChangeBackground from './ChangeBackground.tsx';
 import * as React from 'react';
 import Restart from './Restart.tsx';
+import Statistics from "./Statistics.tsx";
 
 
 const Board: React.FC =() => {
   const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
   const [isNext, setIsNext] = useState(true);
+  const [xWins, setXWins] = useState(0);
+  const [oWins, setOWins] = useState(0);
+  const [totalGames, setTotalGames] = useState(0);
+
+  const winner = calculateWinner({squares});
+  const draw = squares.every(square => square!== null) && !winner;
+
+  useEffect(() =>{
+      if (winner) {
+          if (winner === 'X') setXWins((prev) => prev + 1);
+          if (winner === 'O') setOWins((prev) => prev + 1);
+          setTotalGames((prev) => prev + 1);
+      } else if(draw) {
+          setTotalGames((prev) => prev + 1);
+      }
+  }, [winner, draw]);
 
   function handleClick(i: number) {
     if (calculateWinner({squares}) || squares[i]) return;
@@ -21,8 +38,6 @@ const Board: React.FC =() => {
 
   }
 
-  const winner = calculateWinner({squares})
-  const draw = squares.every(square => square!== null) && !winner;
   let status;
   if (winner) {
     status = "Winner " + winner;
@@ -59,7 +74,8 @@ const Board: React.FC =() => {
         <Square value={squares[7]} OnClick={() => handleClick(7)}/>
         <Square value={squares[8]} OnClick={() => handleClick(8)}/>
       </div>
-      <Restart OnClick={handleRestart}/>
+        <Statistics xWins={xWins} oWins={oWins} totalGames={totalGames} />
+        <Restart OnClick={handleRestart}/>
     </>
   )
 }
