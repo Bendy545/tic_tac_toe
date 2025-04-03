@@ -1,13 +1,13 @@
-import Square from './Square.tsx';
+import Square from '../Square.tsx';
 import {useEffect, useState} from 'react';
 import calculateWinner from './CalculateWinner.tsx';
-import ChangeBackground from './ChangeBackground.tsx';
+import ChangeBackground from '../ChangeBackground.tsx';
 import * as React from 'react';
-import Restart from './Restart.tsx';
-import Statistics from "./Statistics.tsx";
+import Restart from '../Restart.tsx';
+import Statistics from "../Statistics.tsx";
 
 
-const Board: React.FC =() => {
+const Board: React.FC<{toggleBoard: () => void}> =({toggleBoard}) => {
   const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
   const [isNext, setIsNext] = useState(true);
   const [xWins, setXWins] = useState(0);
@@ -75,7 +75,12 @@ const Board: React.FC =() => {
         <Square value={squares[8]} OnClick={() => handleClick(8)}/>
       </div>
         <Statistics xWins={xWins} oWins={oWins} totalGames={totalGames} />
-        <Restart OnClick={handleRestart}/>
+      <div className="d-flex justify-content-around">
+        <Restart OnClick={handleRestart} />
+        <button onClick={toggleBoard} className="btn p-3 text-black mt-3 btn-lg bg-warning shadow-lg rounded-5 btn-sm">
+          Switch to 4x4 Board
+        </button>
+      </div>
     </>
   )
 }
