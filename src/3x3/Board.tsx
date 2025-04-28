@@ -6,8 +6,12 @@ import * as React from 'react';
 import Restart from '../Restart.tsx';
 import Statistics from "../Statistics.tsx";
 
+interface BoardProps {
+  isDarkMode: boolean,
+  toggleBoard: () => void
+}
 
-const Board: React.FC<{toggleBoard: () => void}> =({toggleBoard}) => {
+const Board: React.FC<BoardProps> =({toggleBoard, isDarkMode}) => {
   const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
   const [isNext, setIsNext] = useState(true);
   const [xWins, setXWins] = useState(0);
@@ -58,7 +62,7 @@ const Board: React.FC<{toggleBoard: () => void}> =({toggleBoard}) => {
         <div className="mb-3 h5 w-75 bg-dark text-light p-3 rounded-5 bg-gradient">{status}</div>
       </div>
 
-      <ChangeBackground winner={winner} draw={draw}/>
+      <ChangeBackground winner={winner} draw={draw} isDarkMode={isDarkMode}/>
       <div className="board-row">
         <Square value={squares[0]} OnClick={() => handleClick(0)}/>
         <Square value={squares[1]} OnClick={() => handleClick(1)}/>
