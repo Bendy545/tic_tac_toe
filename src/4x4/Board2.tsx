@@ -6,7 +6,12 @@ import Square from '../Square.tsx';
 import Statistics from '../Statistics.tsx';
 import Restart from '../Restart.tsx';
 
-const Board2: React.FC<{toggleBoard: () => void}> = ({toggleBoard}) => {
+interface Board2Props {
+  toggleBoard: () => void,
+  isDarkMode: boolean
+}
+
+const Board2: React.FC<Board2Props> = ({toggleBoard, isDarkMode}) => {
   const [squares, setSquares] = useState<Array<string | null>>(Array(16).fill(null)); // 4x4 grid
   const [isNext, setIsNext] = useState(true);
   const [xWins, setXWins] = useState(0);
@@ -56,7 +61,7 @@ const Board2: React.FC<{toggleBoard: () => void}> = ({toggleBoard}) => {
         <div className="mb-3 h5 w-75 bg-dark text-light p-3 rounded-5 bg-gradient">{status}</div>
       </div>
 
-      <ChangeBackground winner={winner} draw={draw} />
+      <ChangeBackground winner={winner} draw={draw} isDarkMode={isDarkMode}/>
 
         <div className="board-row">
           <Square value={squares[0]} OnClick={() => handleClick(0)} />
