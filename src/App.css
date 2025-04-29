@@ -43,26 +43,37 @@
 .squareButton {
   width: 100px;
   height: 100px;
-  font-size: 2rem;
+  font-size: 2rem !important;
+  font-weight: bold !important;
   padding: 0;
   text-align: center;
 }
 
-body.dark-mode {
-  background-color: #121212;
-  color: #e0e0e0;
+.square-dark-x {
+  background-color: #11053b !important;
+  color: #FFA500 !important;
 }
 
-.dark-mode .btn-light {
-  background-color: #333;
-  color: #e0e0e0;
+.square-dark-o {
+  background-color: #FFA500 !important;
+  color: #11053b !important;
 }
 
-.dark-mode .bg-dark {
-  background-color: #222 !important;
+.square-light-x {
+  background-color: #d9cafe !important;
+  color: #371a94 !important;
 }
 
-.dark-mode .text-light {
-  color: #e0e0e0 !important;
+.square-light-o {
+  background-color: #371a94 !important;
+  color: #d9cafe !important;
 }
 
+.stat-text {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+}
+
+.borderDark {
+  border-color: black !important;
+}

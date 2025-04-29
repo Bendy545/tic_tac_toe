@@ -4,15 +4,18 @@ interface  StatisticsProps {
     xWins: number
     oWins: number
     totalGames: number
+    isDarkMode: boolean
 }
 
-const Statistics: React.FC<StatisticsProps> = ({xWins, oWins, totalGames}: StatisticsProps) => {
+const Statistics: React.FC<StatisticsProps> = ({xWins, oWins, totalGames, isDarkMode}: StatisticsProps) => {
+  const x_stat = isDarkMode ? 'square-dark-x' : 'square-light-x'
+  const o_stat = isDarkMode ? 'square-dark-o' : 'square-light-o'
     return (
         <div className="mt-3 bg-dark text-light p-2 rounded-5">
             <h3>Game Statistics</h3>
-            <p className="bg-warning text-dark rounded-5">Total Games Played: {totalGames}</p>
-            <p className="bg-danger rounded-5 text-light">X Wins: {xWins}</p>
-            <p className="bg-success rounded-5 text-light">O Wins: {oWins}</p>
+            <p className={`rounded-5 p-2 ${x_stat} stat-text`}>Total Games Played: {totalGames}</p>
+            <p className={`rounded-5 p-2 ${x_stat} stat-text`}>X Wins: {xWins}</p>
+            <p className={`rounded-5 p-2 ${o_stat} stat-text`}>O Wins: {oWins}</p>
         </div>
     )
 }

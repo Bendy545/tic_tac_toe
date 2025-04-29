@@ -9,9 +9,9 @@ interface ChangeBackgroundProps {
 const ChangeBackground :React.FC<ChangeBackgroundProps> = ({ winner, draw, isDarkMode }:ChangeBackgroundProps) =>  {
   React.useEffect(() => {
     if (winner === 'O') {
-      document.body.style.backgroundColor = '#28a745'; // O wins
+      document.body.style.backgroundColor = isDarkMode ? '#FFA500':'#371a94'; // O wins
     } else if (winner === 'X') {
-      document.body.style.backgroundColor = '#dc3545'; // X wins
+      document.body.style.backgroundColor =  isDarkMode ? '#11053b' : '#d9cafe'; // X wins
     } else if (draw) {
       document.body.style.backgroundColor = 'rgba(255,205,68,0.85)'; // Draw
     } else {

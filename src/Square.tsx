@@ -1,12 +1,24 @@
 import * as React from 'react';
+import './App.css';
 
 interface SquareProps {
   value: string|null,
-  OnClick: () => void
+  OnClick: () => void,
+  isDarkMode: boolean
 }
 
-const Square: React.FC<SquareProps> = ({value, OnClick} : SquareProps) => {
-  const buttonClass = value === 'X' ? 'btn-danger' : value === 'O' ? 'btn-success' : 'btn-light';
+const Square: React.FC<SquareProps> = ({value, OnClick, isDarkMode} : SquareProps) => {
+  const buttonClass =
+    isDarkMode ? value === 'X'
+        ? 'square-dark-x'
+        : value === 'O'
+          ? 'square-dark-o'
+          : 'square-dark-empty'
+      : value === 'X'
+        ? 'square-light-x'
+        : value === 'O'
+          ? 'square-light-o'
+          : 'btn-light';
   return (
     <button
       type="button"
