@@ -20,6 +20,8 @@ const Board: React.FC<BoardProps> =({toggleBoard, isDarkMode}) => {
 
   const winner = calculateWinner({squares});
   const draw = squares.every(square => square!== null) && !winner;
+  const switchBtnClass = isDarkMode ? 'square-dark-o' : 'square-light-o';
+  const borderBtn = isDarkMode ? 'borderDark' : 'border-dark-subtle';
 
   useEffect(() =>{
       if (winner) {
@@ -64,24 +66,25 @@ const Board: React.FC<BoardProps> =({toggleBoard, isDarkMode}) => {
 
       <ChangeBackground winner={winner} draw={draw} isDarkMode={isDarkMode}/>
       <div className="board-row">
-        <Square value={squares[0]} OnClick={() => handleClick(0)}/>
-        <Square value={squares[1]} OnClick={() => handleClick(1)}/>
-        <Square value={squares[2]} OnClick={() => handleClick(2)}/>
+        <Square value={squares[0]} OnClick={() => handleClick(0)} isDarkMode={isDarkMode}/>
+        <Square value={squares[1]} OnClick={() => handleClick(1)} isDarkMode={isDarkMode}/>
+        <Square value={squares[2]} OnClick={() => handleClick(2)} isDarkMode={isDarkMode}/>
       </div>
       <div className="board-row">
-        <Square value={squares[3]} OnClick={() => handleClick(3)}/>
-        <Square value={squares[4]} OnClick={() => handleClick(4)}/>
-        <Square value={squares[5]} OnClick={() => handleClick(5)}/>
+        <Square value={squares[3]} OnClick={() => handleClick(3)} isDarkMode={isDarkMode}/>
+        <Square value={squares[4]} OnClick={() => handleClick(4)} isDarkMode={isDarkMode}/>
+        <Square value={squares[5]} OnClick={() => handleClick(5)} isDarkMode={isDarkMode}/>
       </div>
       <div className="board-row">
-        <Square value={squares[6]} OnClick={() => handleClick(6)}/>
-        <Square value={squares[7]} OnClick={() => handleClick(7)}/>
-        <Square value={squares[8]} OnClick={() => handleClick(8)}/>
+        <Square value={squares[6]} OnClick={() => handleClick(6)} isDarkMode={isDarkMode}/>
+        <Square value={squares[7]} OnClick={() => handleClick(7)} isDarkMode={isDarkMode}/>
+        <Square value={squares[8]} OnClick={() => handleClick(8)} isDarkMode={isDarkMode}/>
       </div>
-        <Statistics xWins={xWins} oWins={oWins} totalGames={totalGames} />
+        <Statistics xWins={xWins} oWins={oWins} totalGames={totalGames} isDarkMode={isDarkMode}/>
       <div className="d-flex justify-content-around">
-        <Restart OnClick={handleRestart} />
-        <button onClick={toggleBoard} className="btn p-3 text-black mt-3 btn-lg bg-warning shadow-lg rounded-5 btn-sm">
+        <Restart OnClick={handleRestart} isDarkMode={isDarkMode}/>
+        <button onClick={toggleBoard}
+                className={`${borderBtn} border-3 btn p-3 mt-3 btn-lg shadow-lg rounded-5 btn-sm ${switchBtnClass} stat-text`}>
           Switch to 4x4 Board
         </button>
       </div>
